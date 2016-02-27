@@ -10,5 +10,6 @@ public:
     lcpp();
     lcpp(parent *a);
 };
+//test
 
 #endif // LCPP_H
