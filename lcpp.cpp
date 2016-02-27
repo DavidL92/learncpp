@@ -8,5 +8,5 @@ lcpp::lcpp(parent *w) : parent(1)
 }
 lcpp::lcpp()
 {
-
+//hehe
 }
