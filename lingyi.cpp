@@ -22,7 +22,7 @@ int main()
     }
     for(int i = n - 1;i >= 1;i--)
     {
-        for(int j = 1;j < 11;j++)
+        for(int j = 0;j < 11;j++)
         {
             if(w[i] > j)
             {
@@ -34,6 +34,11 @@ int main()
             }
         }
     }
-    cout << m[5][10];
+    for(int i = 0;i<6;i++)
+    {
+        for(int j = 0;j < 11;j++)
+            cout << m[i][j] << ",";
+        cout<<endl;
+    }
     return 0;
 }
