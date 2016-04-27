@@ -5,7 +5,9 @@ int main()
     Snake * instance = Snake::GetInstance();
     while(1)
     {
-       instance->draw(); 
+        instance->update();
+        instance->draw(); 
+        sleep(1);
     }
     return 1;
 }

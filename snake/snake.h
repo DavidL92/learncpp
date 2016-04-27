@@ -2,21 +2,45 @@
 #include <vector>
 #include <time.h>
 #include <stdlib.h>
+#include <algorithm>
+#include <memory.h>
+#include <unistd.h>
+#include <curses.h>
 
-#define random() (rand() % 50)
+#define WIDTH 40
+#define HEIGHT 30
+
+#define randomW() (rand() % WIDTH)
+#define randomH() (rand() % HEIGHT)
 
 using namespace std;
+
+typedef enum _direction
+{
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
+}direction;
 typedef struct _coord
 {
     int x;
     int y;
-   
+    bool operator==(const _coord& rhs) const
+    {
+        return (x == rhs.x && y == rhs.y);
+    }
 }coord;
 
-bool operator==(coord& rhs,coord& tmp)
+typedef struct _snake_node 
 {
-    return (tmp.x == rhs.x && tmp.y == rhs.y);
-}
+    coord pos;
+    direction direct;
+    bool operator==(const _snake_node& rhs) const
+    {
+        return (pos == rhs.pos && pos == rhs.pos);
+    }
+}snake_node;
 
 typedef struct _clip
 {
@@ -32,16 +56,23 @@ class Snake
         ~Snake();
         void draw();
         void update_snake_pos();
+        void update();
         void set_coord(coord);
         void add_tail();//add new node to tail when collision
         void init_snake_body();
         bool collision_detect();
-        coord get_ran_pos();
+        bool IsHitTheWall();
+        bool IsHitBody();
+        void UpdateDirection();
+        void set_border();
+        void update_food_pos();
+        void ChangeDirection(direction);
         static Snake *GetInstance();
     private:
         Snake();
-        vector<coord> snake_body;
-        coord pos;
+        vector<snake_node> snake_body;
+        coord food_pos;
         clip snake_clip;
         static Snake *_instance;
+        char record_pos[HEIGHT][WIDTH];
 };
